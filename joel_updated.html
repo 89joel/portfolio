@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yann Joel Bikoko — Expert Digital & Cybersécurité</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f2ec;
+    --gold: #d4a843;
+    --gold-light: #f0c96a;
+    --accent: #1a3a5c;
+    --accent2: #e84c1e;
+    --mid: #6b6b7a;
+    --border: rgba(10,10,15,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 4rem;
+    background: rgba(245,242,236,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mid);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--paper) !important;
+    padding: 0.55rem 1.4rem; border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent2) !important; color: var(--paper) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding: 0 4rem; padding-top: 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding-right: 4rem; padding-bottom: 4rem;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent2);
+    margin-bottom: 2rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 28px; height: 2px; background: var(--accent2);
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.8rem;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--gold);
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 3px;
+  }
+  .hero-desc {
+    font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+    color: #444; max-width: 480px; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: var(--paper);
+    padding: 0.9rem 2rem; border-radius: 2px;
+    font-family: 'Syne', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--ink); color: var(--ink);
+    padding: 0.9rem 2rem; border-radius: 2px;
+    font-family: 'Syne', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3.5rem;
+    padding-top: 3rem; border-top: 1px solid var(--border);
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    color: var(--ink); line-height: 1;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-label { font-size: 0.78rem; color: var(--mid); margin-top: 0.3rem; }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; padding-bottom: 4rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .hero-visual {
+    position: relative; width: 420px; height: 520px;
+  }
+  .hero-img-frame {
+    position: absolute; top: 60px; left: 40px;
+    width: 300px; height: 380px;
+    background: var(--accent);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .hero-photo {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(15%) contrast(1.05);
+    transition: filter 0.4s ease, transform 0.4s ease;
+  }
+  .hero-img-frame:hover .hero-photo {
+    filter: grayscale(0%) contrast(1.1);
+    transform: scale(1.03);
+  }
+  .hero-card {
+    position: absolute; bottom: 50px; right: 0;
+    background: var(--gold);
+    padding: 1.4rem 1.8rem;
+    border-radius: 2px;
+    width: 220px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .hero-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.5rem; color: var(--ink);
+  }
+  .hero-card-text {
+    font-size: 0.85rem; font-weight: 300; color: var(--ink); line-height: 1.5;
+  }
+  .hero-badge {
+    position: absolute; top: 20px; right: 20px;
+    width: 100px; height: 100px;
+    background: var(--accent2);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #fff; text-align: center;
+    box-shadow: 4px 4px 0 var(--ink);
+    animation: spin 20s linear infinite;
+  }
+  .hero-badge-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem; font-weight: 800; line-height: 1;
+  }
+  .hero-badge-txt { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .deco-line {
+    position: absolute; top: 0; left: 50%;
+    width: 1px; height: 100%;
+    background: var(--border);
+  }
+  .deco-dot {
+    position: absolute;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--ink); color: var(--paper);
+    padding: 1rem 0; overflow: hidden;
+  }
+  .marquee-inner {
+    display: flex; gap: 3rem;
+    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 1rem;
+    flex-shrink: 0;
+  }
+  .marquee-item::after {
+    content: '◆'; color: var(--gold); font-size: 0.6rem;
+  }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 24px; height: 1.5px; background: var(--accent2);
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -0.03em; margin-bottom: 1rem;
+  }
+
+  /* ── EXPERTISE ── */
+  .expertise { background: var(--ink); color: var(--paper); }
+  .expertise .section-label { color: var(--gold); }
+  .expertise .section-label::before { background: var(--gold); }
+  .expertise .section-title { color: var(--paper); }
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; margin-top: 4rem;
+    background: rgba(255,255,255,0.1);
+  }
+  .expertise-card {
+    background: var(--ink); padding: 3rem 2.5rem;
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .expertise-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .expertise-card:hover { background: #12121a; }
+  .expertise-card:hover::before { transform: scaleX(1); }
+  .exp-icon {
+    font-size: 2rem; margin-bottom: 1.5rem;
+    display: block;
+  }
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    margin-bottom: 1rem; color: var(--paper);
+  }
+  .exp-desc {
+    font-size: 0.88rem; line-height: 1.7;
+    color: rgba(245,242,236,0.55);
+  }
+  .exp-num {
+    position: absolute; top: 2rem; right: 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem; font-weight: 800;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs-intro {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start; margin-bottom: 4rem;
+  }
+  .certs-desc {
+    font-size: 1rem; font-weight: 300; line-height: 1.8; color: #555;
+    padding-top: 0.5rem;
+  }
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  }
+  .cert-badge {
+    aspect-ratio: 1;
+    border: 1.5px solid var(--border);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.6rem; padding: 1.5rem;
+    border-radius: 4px; text-align: center;
+    transition: all 0.3s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .cert-badge::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--ink);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .cert-badge:hover::after { transform: translateY(0); }
+  .cert-badge:hover .cert-name { color: var(--paper); }
+  .cert-badge:hover .cert-logo { filter: invert(1); }
+  .cert-logo {
+    font-size: 1.8rem; position: relative; z-index: 1;
+    transition: filter 0.3s;
+  }
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    line-height: 1.3; position: relative; z-index: 1;
+    transition: color 0.3s;
+  }
+
+  /* ── EDUCATION ── */
+  .education { background: #0f0f18; color: var(--paper); }
+  .education .section-label { color: var(--gold-light); }
+  .education .section-label::before { background: var(--gold-light); }
+  .education .section-title { color: var(--paper); }
+  .edu-timeline { margin-top: 4rem; position: relative; }
+  .edu-timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px; background: rgba(255,255,255,0.1);
+  }
+  .edu-item {
+    padding: 2rem 0 2rem 3rem; position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-item::before {
+    content: ''; position: absolute;
+    left: -4px; top: 2.4rem;
+    width: 9px; height: 9px;
+    border-radius: 50%; background: var(--gold);
+    border: 2px solid #0f0f18;
+  }
+  .edu-year {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .edu-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--paper); margin-bottom: 0.3rem;
+  }
+  .edu-org { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--gold); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+  .contact .section-label { color: var(--ink); }
+  .contact .section-label::before { background: var(--ink); }
+  .contact .section-title { color: var(--ink); }
+  .contact-desc {
+    font-size: 1rem; line-height: 1.8; margin-top: 1rem;
+    color: rgba(10,10,15,0.7);
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    padding: 1.5rem; background: rgba(10,10,15,0.08);
+    border-radius: 2px; transition: background 0.2s;
+  }
+  .contact-item:hover { background: rgba(10,10,15,0.15); }
+  .contact-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .contact-info-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); margin-bottom: 0.3rem;
+  }
+  .contact-info-val {
+    font-size: 0.92rem; color: rgba(10,10,15,0.7);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(245,242,236,0.4);
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem;
+  }
+  footer a {
+    color: var(--gold); text-decoration: none;
+    font-family: 'Syne', sans-serif; font-weight: 700;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── OPEN TO WORK RIBBON ── */
+  .otw-pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(46,184,46,0.12); border: 1px solid rgba(46,184,46,0.3);
+    color: #1a7a1a; padding: 0.35rem 0.9rem;
+    border-radius: 99px; font-size: 0.75rem; font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .otw-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #2eb82e;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 2rem 1.5rem; padding-top: 90px; }
+    .hero-right { display: none; }
+    .hero-left { padding-right: 0; }
+    section { padding: 4rem 1.5rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .certs-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">BIKOKO<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#education">Formation</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="deco-line"></div>
+  <div class="deco-dot" style="top: 30%; left: calc(50% - 4px);"></div>
+  <div class="deco-dot" style="top: 65%; left: calc(50% - 4px); background: var(--accent2);"></div>
+
+  <div class="hero-left">
+    <div class="otw-pill">
+      <span class="otw-dot"></span>
+      Disponible pour de nouvelles opportunités
+    </div>
+    <div class="hero-tag">Expert Certifié · Cameroun</div>
+    <h1>Yann Joel<br><em>Bikoko</em></h1>
+    <p class="hero-desc">
+      Expert en Marketing Digital &amp; Cybersécurité. Plus de 50 certifications Google, Amazon, Fortinet &amp; Cisco. Spécialiste en stratégie digitale, sécurité des systèmes et formation professionnelle.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Me contacter</a>
+      <a href="#expertise" class="btn-outline">Mon expertise</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">500<span>+</span></div>
+        <div class="stat-label">Relations LinkedIn</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4<span>+</span></div>
+        <div class="stat-label">Plateformes certifiées</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-img-frame">
+        <img
+          src="https://pfst.cf2.poecdn.net/base/image/eb24a23329a7dd17bbd6feb79638e4d082acecb0f8907dfc27217e93ea39ec20?w=600&h=600"
+          alt="Yann Joel Bikoko"
+          class="hero-photo"
+        >
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-title">Statut actuel</div>
+        <div class="hero-card-text">Spécialiste Marketing Numérique &amp; Web, ouvert aux projets</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">50+</div>
+        <div class="hero-badge-txt">Certif.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="marquee-item">Marketing Digital</span>
+    <span class="marquee-item">Cybersécurité</span>
+    <span class="marquee-item">Google Ads</span>
+    <span class="marquee-item">Fortinet NSE</span>
+    <span class="marquee-item">Cisco</span>
+    <span class="marquee-item">Amazon AWS</span>
+    <span class="marquee-item">SEO &amp; Analytics</span>
+    <span class="marquee-item">E-commerce</span>
+    <span class="marquee-item">Video &amp; App Ads</span>
+    <span class="marquee-item">Réseau &amp; Sécurité</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Marketing Digital</span>
+    <span class="marquee-item">Cybersécurité</span>
+    <span class="marquee-item">Google Ads</span>
+    <span class="marquee-item">Fortinet NSE</span>
+    <span class="marquee-item">Cisco</span>
+    <span class="marquee-item">Amazon AWS</span>
+    <span class="marquee-item">SEO &amp; Analytics</span>
+    <span class="marquee-item">E-commerce</span>
+    <span class="marquee-item">Video &amp; App Ads</span>
+    <span class="marquee-item">Réseau &amp; Sécurité</span>
+  </div>
+</div>
+
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+  <div class="section-label">Domaines de compétence</div>
+  <div class="section-title">Une double expertise<br>unique en Afrique centrale</div>
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <span class="exp-num">01</span>
+      <span class="exp-icon">📊</span>
+      <div class="exp-title">Marketing Digital</div>
+      <p class="exp-desc">Stratégie digitale complète : Google Search &amp; Display, Video Ads, App Campaigns, e-commerce, et analytics avancés pour maximiser le ROI de vos campagnes.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="exp-num">02</span>
+      <span class="exp-icon">🔐</span>
+      <div class="exp-title">Cybersécurité</div>
+      <p class="exp-desc">Protection des systèmes d'information avec les technologies Fortinet, Cisco et Amazon. Audit de sécurité, pare-feux, VPN, et gestion des incidents.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="exp-num">03</span>
+      <span class="exp-icon">🎓</span>
+      <div class="exp-title">Formation &amp; Conseil</div>
+      <p class="exp-desc">Formateur certifié au Centre Prometheus et à l'Université Siantou. Transmission des compétences digitales et cybersécurité aux professionnels camerounais.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="exp-num">04</span>
+      <span class="exp-icon">🛒</span>
+      <div class="exp-title">E-commerce &amp; Growth</div>
+      <p class="exp-desc">Optimisation des tunnels de vente, stratégies d'acquisition digitale, gestion de catalogues produits et expériences d'achat convertissantes.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="exp-num">05</span>
+      <span class="exp-icon">📡</span>
+      <div class="exp-title">Réseaux &amp; Infrastructure</div>
+      <p class="exp-desc">Configuration, maintenance et sécurisation des infrastructures réseau d'entreprise. Expertise Cisco CCNA et solutions cloud AWS.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="exp-num">06</span>
+      <span class="exp-icon">📈</span>
+      <div class="exp-title">Analytics &amp; Data</div>
+      <p class="exp-desc">Exploitation des données marketing pour des décisions éclairées : Google Analytics, Search Console, rapports de performance et tableaux de bord.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="certs-intro">
+    <div>
+      <div class="section-label">Certifications officielles</div>
+      <div class="section-title">Plus de 50 certifications<br>reconnues mondialement</div>
+    </div>
+    <p class="certs-desc">
+      Un parcours de certification rigoureux sur les plateformes leaders mondiaux — Google, Amazon Web Services, Fortinet, Cisco et HubSpot — attestant d'une expertise technique de haut niveau, constamment mise à jour.
+    </p>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-badge">
+      <span class="cert-logo">🔵</span>
+      <span class="cert-name">Google Ads Search</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">🎬</span>
+      <span class="cert-name">Google Video &amp; App Ads</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">🟠</span>
+      <span class="cert-name">Amazon AWS Cloud</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">🛡️</span>
+      <span class="cert-name">Fortinet NSE</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">🔗</span>
+      <span class="cert-name">Cisco CCNA</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">🟧</span>
+      <span class="cert-name">HubSpot Academy</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">📊</span>
+      <span class="cert-name">Google Analytics</span>
+    </div>
+    <div class="cert-badge">
+      <span class="cert-logo">🛒</span>
+      <span class="cert-name">E-commerce Optimization</span>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="section-label">Parcours académique</div>
+  <div class="section-title">Formation &amp; Expérience</div>
+  <div class="edu-timeline">
+    <div class="edu-item">
+      <div class="edu-year">En cours · Yaoundé</div>
+      <div class="edu-title">Centre de Formation Prometheus</div>
+      <div class="edu-org">Formateur &amp; Expert Certifié — Marketing Digital &amp; Cybersécurité</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">Formation supérieure · Cameroun</div>
+      <div class="edu-title">Université Siantou Supérieur</div>
+      <div class="edu-org">Enseignement supérieur — Technologies de l'information et du numérique</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">Certifications continues</div>
+      <div class="edu-title">Google · Amazon · Fortinet · Cisco · HubSpot</div>
+      <div class="edu-org">+50 certifications officielles — Plateformes mondiales de référence</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">Localisation</div>
+      <div class="edu-title">Yaoundé IV, Région du Centre</div>
+      <div class="edu-org">Cameroun — Disponible pour missions locales et internationales</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-label">Entrons en contact</div>
+      <div class="section-title">Collaborons<br>ensemble</div>
+      <p class="contact-desc">À l'écoute de nouvelles opportunités professionnelles — postes en marketing numérique, cybersécurité, conseil ou formation. N'hésitez pas à me contacter.</p>
+    </div>
+    <div class="contact-details">
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-info-title">Localisation</div>
+          <div class="contact-info-val">Yaoundé IV, Région du Centre, Cameroun</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">💼</span>
+        <div>
+          <div class="contact-info-title">LinkedIn</div>
+          <div class="contact-info-val">linkedin.com/in/yann-joel-bikoko</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📧</span>
+        <div>
+          <div class="contact-info-title">Email</div>
+          <div class="contact-info-val"><a href="mailto:byannjoel@gmail.com" style="color:inherit;text-decoration:underline;">byannjoel@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🎓</span>
+        <div>
+          <div class="contact-info-title">Affiliation</div>
+          <div class="contact-info-val">Centre de Formation Prometheus · Université Siantou Supérieur</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✅</span>
+        <div>
+          <div class="contact-info-title">Disponibilité</div>
+          <div class="contact-info-val">Ouvert aux opportunités — Marketing numérique &amp; Cybersécurité</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 <a href="#">Yann Joel Bikoko</a> — Expert Digital &amp; Cybersécurité</span>
+  <span>Yaoundé · Cameroun · <a href="#">LinkedIn</a></span>
+</footer>
+
+</body>
+</html>
